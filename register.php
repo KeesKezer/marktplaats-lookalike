@@ -71,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
 
-            
+
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Registratie</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="blog.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <?php require_once ("header.php")?>
 
 
