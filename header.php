@@ -14,9 +14,11 @@
         <li><a href="register.php">Registreren</a></li>
         <li><a href="#">Advertentie</a></li>
         <li><a href="#">Contact</a></li>
+        <li><a href="landing.php"><?php echo htmlspecialchars($_SESSION["username"]); ?></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
   </div>

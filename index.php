@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once("db.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +13,8 @@
   <link rel="stylesheet" href= "style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <?php require_once "header.php" ?>
+  <?php require_once "header.php" ?>
+
 </head>
 <body>
 

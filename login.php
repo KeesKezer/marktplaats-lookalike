@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+require_once "db.php";
 
 // checks if user is logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 
 
-require_once "db.php";
+
 
 
 $username = $password = "";
@@ -37,13 +37,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT user_id, username, password FROM users WHERE username = ?";
 
+
         if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-
-            // Set parameters
-            $param_username = $username;
-
+            mysqli_stmt_bind_param($stmt, "s", $username);
 
             if(mysqli_stmt_execute($stmt)){
                 // Store result
@@ -54,6 +51,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
+                    //  echo $username;
+                    //  echo $hashed_password;
+                    //  exit;
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             session_start();
@@ -63,11 +63,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["user_id"] = $id;
                             $_SESSION["username"] = $username;
 
+
                             // Redirect user to welcome page
                             header("location: welcome.php");
                         } else{
 
                             $password_err = "Het ingevulde wachtwoord klopte niet.";
+                            var_dump($password_err);
                         }
                     }
                 } else{
@@ -94,6 +96,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <?php require_once ("header.php")?>
 
 </head>
