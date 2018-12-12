@@ -3,19 +3,22 @@
     include_once("db.php");
 
 
+
     if(isset($_POST['post'])){
-      $title = strip_tags($_POST['title']);
-      $content = strip_tags($_POST['content']);
-      $category= strip_tags($_POST['categories']);
+      $title = strip_tags($_POST['titel']);
+      $content = strip_tags($_POST['omschrijving']);
+      $ini_prijs = strip_tags($_POST['initieleprijs']);
+      $user_id = ($_SESSION["user_id"]);
 
       $title = mysqli_real_escape_string($db, $title);
       $content = mysqli_real_escape_string($db, $content);
-      $date = date('l jS \of F Y h:i:s A');
-      $category = mysqli_real_escape_string($db, $category);
 
-      $sql = "INSERT into posts (title, content, date, category_id) VALUES ('$title', '$content', '$date', '$category')";
+      $ini_prijs = mysqli_real_escape_string($db, $ini_prijs);
 
-    if($title == "" || $content == ""|| $category == "") {
+
+      $sql = "INSERT into advertentie (titel, omschrijving, ini_prijs, user_id) VALUES ('$title', '$content', '$ini_prijs', '$user_id')";
+
+    if($title == "" || $content == ""|| $ini_prijs == "") {
       echo "Vul de velden in";
         return;
      }
@@ -34,15 +37,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <title>Blog Post</title>
+  <title>Adverntie plaatsen</title>
   </head>
   <body>
-    <form action ="post.php" method="post" enctype="multipart/form-data">
-      <input placeholder="Title" name="title" type="text" autofocussize="48>"><br /><br />
-
-      
-
-      <textarea placeholder="Content" name="content" rows="20" cols="50"></textarea><br />
+    <form action ="advert.php" method="post" enctype="multipart/form-data">
+      <input placeholder="Titel" name="titel" type="text" autofocussize="48>"><br /><br />
+      <textarea placeholder="omschrijving" name="omschrijving" rows="20" cols="50"></textarea><br />
+      <input placeholder="initiele prijs" type="number" name="initieleprijs"><br>
       <input name="post" type="submit" value="Post">
     </form>
   </body>
