@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.php">Home</a></li>
         <li><a href="register.php">Registreren</a></li>
-        <li><a href="advert.php">Advertentie</a></li>
+        <li><a href="advert.php">Advertentie plaatsen</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="landing.php"><?php echo htmlspecialchars($_SESSION["username"]); ?></a></li>
       </ul>

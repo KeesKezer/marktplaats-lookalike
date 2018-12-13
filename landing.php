@@ -25,25 +25,28 @@
         if(mysqli_num_rows($res) > 0) {
         while($row = mysqli_fetch_assoc($res)) {
 
-          $id = $row['user_id'];
+          $id = $row['advertentie_id'];
+
           $title = $row['titel'];
           $omschrijving = $row['omschrijving'];
           $date = $row['plaatsingstijd'];
+          $admin= "<a href = 'del_post.php?id=$id'>Delete</a>";
 
           $posts .= "<div class='container-fluid text-center'>
-                      <div class='row content'>
-                        <div class='col-sm-2 sidenav'>
-                          <p><a href='#'>Link</a></p>
-                          <p><a href='#'>Link</a></p>
-                          <p><a href='#'>Link</a></p>
-                        </div>
-                        <div class='col-sm-8 text-left'>
-                          <h1>$id</h1>
-                          <p>$omschrijving.</p>
-                          <hr>
-                          <h3>$date</h3>
-                          <p>Lorem ipsum...</p>
-                        </div>
+                        <div class='row content'>
+                          <div class='col-sm-2 sidenav'>
+                            <p><a href='#'>Link</a></p>
+                            <p><a href='#'>Link</a></p>
+                            <p><a href='#'>Link</a></p>
+                          </div>
+                          <div class='col-sm-8 text-left'>
+                            <h1>$id</h1>
+
+                            <p>$omschrijving.</p>
+                            <hr>
+                            <h3>$date</h3>
+                            <p>$admin</p>
+                          </div>
 
                         </div>
                       </div>
