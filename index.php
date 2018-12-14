@@ -22,17 +22,19 @@ include_once("db.php");
 <body>
   <?php
 
-    $sql = "SELECT * from advertentie";
+    $sql = "SELECT * from advertentie INNER JOIN users on advertentie.user_id= users.user_id";
     $res = mysqli_query($db,$sql);
     $posts = "";
 
     if(mysqli_num_rows($res) > 0) {
     while($row = mysqli_fetch_assoc($res)) {
 
-      $id = $row['advertentie_id'];
+      $id = $row['username'];
+      $uid =$row['advertentie_id'];
       $title = $row['titel'];
       $omschrijving = $row['omschrijving'];
       $date = $row['plaatsingstijd'];
+      $prijs = $row['ini_prijs'];
 
       $posts .= "<div class='container-fluid text-center'>
                   <div class='row content'>
@@ -43,11 +45,14 @@ include_once("db.php");
                     </div>
                     <div class='col-sm-8 text-left'>
                       <h1>$id</h1>
+                      <h3>$date</h3>
                       <h2>$title</h2>
                       <p>$omschrijving.</p>
                       <hr>
-                      <h3>$date</h3>
-                      <p>Lorem ipsum...</p>
+                      <p>$prijs</p>
+
+                      <h3><a href= 'bied.php?id=$uid'>bied</a></h3>
+
                     </div>
 
                     </div>
@@ -56,7 +61,7 @@ include_once("db.php");
 
 
               }
-
+  //    $sql2 = SELECT * FROM biedingen WHERE advertentie_id =
       echo $posts  ;
     } else {
       echo "Er zijn geen posts";
